@@ -14,7 +14,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_1hmtu")
 
 [node name="CameraController" parent="." unique_id=943875266 instance=ExtResource("2_635qg")]
-transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 0, 2.4090447, 0)
 spring_length = 4.0
 
 [node name="char" parent="." unique_id=1350702109 instance=ExtResource("3_58kc7")]
