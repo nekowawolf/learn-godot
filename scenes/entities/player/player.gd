@@ -29,24 +29,25 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * GRAVITY_MULTIPLIER * delta
 	else:
-		# Jika menyentuh tanah, reset status jumping
 		is_jumping = false
 
 	# 2. Handle Loncat
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		is_jumping = true
+		# Langsung mainkan animasi lompat dan skip bagian awal yang delay
+		if animation_player and animation_player.has_animation("jump"):
+			animation_player.play("jump")
+			animation_player.seek(0.57, true) # SKIP ke detik 0.57
 
-	# 3. Input Arah (WASD)
+	# 3. Input Arah
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
 	if camera_node:
-		# Perbaikan Arah: Mengambil basis kamera dengan benar
 		var look_direction = camera_node.global_transform.basis
 		direction = (look_direction.z * input_dir.y + look_direction.x * input_dir.x).normalized()
 		direction.y = 0 
 
-		# 4. Kecepatan (Shift = Walk)
 		var current_speed = RUN_SPEED
 		if Input.is_action_pressed("sprint"):
 			current_speed = WALK_SPEED
@@ -55,7 +56,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction.x * current_speed
 			velocity.z = direction.z * current_speed
 			
-			# Putar model menghadap arah jalan (Arah diperbaiki)
 			if character_visual:
 				var target_angle = atan2(direction.x, direction.z)
 				character_visual.rotation.y = lerp_angle(character_visual.rotation.y, target_angle, 0.2)
@@ -69,12 +69,14 @@ func _physics_process(delta: float) -> void:
 func update_animations():
 	if not animation_player: return
 
-	# Logika agar animasi lompat tidak langsung terpotong
+	# Jika sedang di udara, biarkan animasi jump berjalan
 	if not is_on_floor() or is_jumping:
-		play_if_exists("jump")
-		return # Keluar dari fungsi agar tidak tertimpa animasi idle/run
+		# Jangan gunakan play_if_exists di sini agar tidak kena reset/blend terus menerus
+		if animation_player.current_animation != "jump":
+			animation_player.play("jump")
+		return 
 
-	# Jika di tanah, baru cek jalan atau diam
+	# Jika di tanah
 	if direction != Vector3.ZERO:
 		if Input.is_action_pressed("sprint"):
 			play_if_exists("walk")
@@ -86,5 +88,5 @@ func update_animations():
 func play_if_exists(anim_name: String):
 	if animation_player.has_animation(anim_name):
 		if animation_player.current_animation != anim_name:
-			# Gunakan custom_blend agar transisi antar animasi mulus (0.2 detik)
-			animation_player.play(anim_name, 0.2)
+			# Gunakan blend time 0.1 agar transisi tidak terlalu lambat
+			animation_player.play(anim_name, 0.1)

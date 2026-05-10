@@ -1,10 +1,82 @@
 [gd_scene format=3 uid="uid://c7t4sbf5q1f4m"]
 
 [ext_resource type="PackedScene" uid="uid://dk7mv74d1ns" path="res://models/characters/char.glb" id="1_nhugu"]
+[ext_resource type="Texture2D" uid="uid://c47lgf7v4aaqw" path="res://models/characters/char__10_001.png" id="2_2e2ax"]
+[ext_resource type="Texture2D" uid="uid://iuvtsi7hqa43" path="res://models/characters/char__12_001.png" id="3_0h2qb"]
+[ext_resource type="Texture2D" uid="uid://bthyewx5qc72k" path="res://models/characters/char__13_001.png" id="4_7m6yx"]
+[ext_resource type="Texture2D" uid="uid://ctmgqc1frmrn6" path="res://models/characters/char_Shader_NoneBlack_001.png" id="5_mhbvy"]
+[ext_resource type="Texture2D" uid="uid://dikn3evv4sgmp" path="res://models/characters/char__02_001.png" id="6_aoe4a"]
+[ext_resource type="Texture2D" uid="uid://73fs7mhq5xal" path="res://models/characters/char__03_001.png" id="7_3qfbp"]
+[ext_resource type="Texture2D" uid="uid://bu5us0axntft" path="res://models/characters/char__04_001.png" id="8_x4k48"]
+[ext_resource type="Texture2D" uid="uid://df5ejdmmewqqw" path="res://models/characters/char__06_001.png" id="9_2y56a"]
 
-[node name="char" unique_id=1399200743 instance=ExtResource("1_nhugu")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoe4a"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("2_2e2ax")
 
-[node name="Skeleton3D" parent="idle" parent_id_path=PackedInt32Array(923311249) index="0" unique_id=1266263872]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qfbp"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("3_0h2qb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4k48"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("4_7m6yx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y56a"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("5_mhbvy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5i6c7"]
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hovr5"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c3w3"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("6_aoe4a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wta4q"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("7_3qfbp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukgb5"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("8_x4k48")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6amn"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("9_2y56a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wuq87"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.40089592, 0.25374076, 2.4065375e-07, 1)
+albedo_texture = ExtResource("9_2y56a")
+
+[node name="char" unique_id=243177446 instance=ExtResource("1_nhugu")]
+
+[node name="Skeleton3D" parent="idle" parent_id_path=PackedInt32Array(88568978) index="0" unique_id=1638864342]
 bones/0/position = Vector3(-0.03381169, -2.5802302, -87.60064)
 bones/0/rotation = Quaternion(-0.7122698, -0.021191029, -0.040387396, 0.7004224)
 bones/1/rotation = Quaternion(0.0241291, -0.010637431, 0.023032827, 0.9993869)
@@ -94,5 +166,22 @@ bones/61/rotation = Quaternion(-0.10147423, 0.047176477, 0.025433611, 0.9933935)
 bones/62/rotation = Quaternion(0.5217577, -0.023708183, -0.065190785, 0.8502688)
 bones/63/rotation = Quaternion(0.35978612, 0.018302573, -0.0067836046, 0.93283063)
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=325845334]
+[node name="Body" parent="idle/Skeleton3D" index="0" unique_id=1266919128]
+surface_material_override/0 = SubResource("StandardMaterial3D_aoe4a")
+surface_material_override/1 = SubResource("StandardMaterial3D_3qfbp")
+surface_material_override/2 = SubResource("StandardMaterial3D_x4k48")
+surface_material_override/3 = SubResource("StandardMaterial3D_2y56a")
+surface_material_override/4 = SubResource("StandardMaterial3D_5i6c7")
+
+[node name="Face" parent="idle/Skeleton3D" index="1" unique_id=406592152]
+surface_material_override/0 = SubResource("StandardMaterial3D_hovr5")
+surface_material_override/1 = SubResource("StandardMaterial3D_2c3w3")
+surface_material_override/2 = SubResource("StandardMaterial3D_wta4q")
+surface_material_override/3 = SubResource("StandardMaterial3D_ukgb5")
+surface_material_override/4 = SubResource("StandardMaterial3D_r6amn")
+
+[node name="Hair" parent="idle/Skeleton3D" index="2" unique_id=1826452711]
+surface_material_override/0 = SubResource("StandardMaterial3D_wuq87")
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=320579723]
 autoplay = &"idle"
